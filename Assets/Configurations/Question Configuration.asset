@@ -15,4 +15,9 @@ MonoBehaviour:
   _questionView: {fileID: 2602793716304188527, guid: 9c2e807c51704464a8f4b736a0a1ca68, type: 3}
   _questionModel:
     _answerConfiguration: {fileID: 11400000, guid: d7fc4f4a6bc7ae14385e2a89f08f2f4e, type: 2}
-    _answersAmount: 4
+    _questionResultScreenConfiguration: {fileID: 11400000, guid: 1ffa351c25daa3d4d886118dad70edaf, type: 2}
+    _pointsToAdd: 1
+    _correctAnswerText: "\u0412\u0435\u0440\u043D\u043E"
+    _wrongAnswerText: "\u041D\u0435\u0432\u0435\u0440\u043D\u043E"
+    _correctAnswerSprite: {fileID: 21300000, guid: 3b94d286ab8f95b4fba9b2950cb3bb5f, type: 3}
+    _wrongAnswerSprite: {fileID: 21300000, guid: 80a04eb771fa38845a7031dfba268288, type: 3}

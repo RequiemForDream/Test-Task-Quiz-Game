@@ -1,4 +1,5 @@
-﻿using Factories;
+﻿using Counters;
+using Factories;
 using Factories.Interfaces;
 using Questions;
 using Questions.Interfaces;
@@ -11,29 +12,38 @@ namespace Core
     {
         private readonly Transform _questionContainer;
         private readonly QuestionConfiguration _questionConfiguration;
+        private readonly CorrectAnswersCounter _correctAnswersCounter;
 
         private List<IQuestion> _questions = new List<IQuestion>();
         private IFactory<IQuestion> _questionFactory;
 
-        public QuestionGenerator( Transform questionCntainer,
-            QuestionConfiguration questionConfiguration)
+        public QuestionGenerator(Transform questionCntainer, QuestionConfiguration questionConfiguration,
+            CorrectAnswersCounter correctAnswerCounter)
         {
             _questionContainer = questionCntainer;
             _questionConfiguration = questionConfiguration;
-            CreateQuestionFactory();
-            CreateQuestion();
+            _correctAnswersCounter = correctAnswerCounter;
+            
+            Initialize();
         }
 
-        private void CreateQuestionFactory()
+        private void Initialize()
         {
-            _questionFactory = new QuestionFactory(_questionConfiguration);
+            CreateQuestionFactory();
+            CreateQuestion();
         }
 
         private void CreateQuestion()
         {
             var question = _questionFactory.Create();
+            question.OnNextQuestionButtonClicked += CreateQuestion;
             _questions.Add(question);
             question.QuestionTransform.SetParent(_questionContainer, false);
+        }
+
+        private void CreateQuestionFactory()
+        {
+            _questionFactory = new QuestionFactory(_questionConfiguration, _correctAnswersCounter);
         }
     }
 }

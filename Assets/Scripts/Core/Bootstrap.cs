@@ -1,4 +1,6 @@
+using Counters;
 using Questions;
+using UI;
 using UnityEngine;
 
 namespace Core
@@ -7,15 +9,23 @@ namespace Core
     {
         [SerializeField] private QuestionConfiguration _questionConfiguration;
         [SerializeField] private Transform _questionContainer;
+        [SerializeField] private GameOverScreen _gameOverScreen;
 
         private void Awake()
         {
-            var questionGenerator = BindQuestionGenerator();
+            var scoreCounter = BindCorrectAnswerCounter();
+            _gameOverScreen.Initialize(scoreCounter);
+            var questionGenerator = BindQuestionGenerator(scoreCounter);
         }
 
-        private QuestionGenerator BindQuestionGenerator()
+        private QuestionGenerator BindQuestionGenerator(CorrectAnswersCounter correctAnswersCounter)
         {
-            return new QuestionGenerator(_questionContainer, _questionConfiguration);
+            return new QuestionGenerator(_questionContainer, _questionConfiguration, correctAnswersCounter);
+        }
+
+        private CorrectAnswersCounter BindCorrectAnswerCounter()
+        {
+            return new CorrectAnswersCounter();
         }
     }
 }
