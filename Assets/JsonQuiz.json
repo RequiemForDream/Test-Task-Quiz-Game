@@ -1,48 +1,114 @@
 {
   "questions": [
     {
-      "question": "Какая страна самая большая в мире?",
+      "question": "В каком году вышла первая часть серии Resident Evil?",
       "answers": [
         {
-          "text": "Россия",
+          "text": "1994",
+          "correct": false
+        },
+        {
+          "text": "1995",
+          "correct": false
+        },
+        {
+          "text": "1996",
           "correct": true
         },
         {
-          "text": "США",
-          "correct": false
-        },
-        {
-          "text": "Китай",
-          "correct": false
-        },
-        {
-          "text": "Канада",
+          "text": "2002",
           "correct": false
         }
       ],
-      "background": "backgrounds/russia.jpg"
+      "background": "Sprites/Backgrounds/ResidentEvil"
     },
     {
-      "question": "Какой металл самый тяжелый?",
+      "question": "В каком году Иоганн Гутенберг изобрёл книгопечатание?",
       "answers": [
         {
-          "text": "Золото",
+          "text": "1242",
           "correct": false
         },
         {
-          "text": "Платина",
+          "text": "1534",
           "correct": false
         },
         {
-          "text": "Олово",
-          "correct": false
-        },
-        {
-          "text": "Осмий",
+          "text": "1445",
           "correct": true
+        },
+        {
+          "text": "1476",
+          "correct": false
         }
       ],
-      "background": "backgrounds/osmium.jpg"
+      "background": "Sprites/Backgrounds/Typography"
+    },
+    {
+      "question": "За сколько долларов Стивен Кинг продает права на экранизацию своих произведений?",
+      "answers": [
+        {
+          "text": "1",
+          "correct": true
+        },
+        {
+          "text": "10",
+          "correct": false
+        },
+        {
+          "text": "100",
+          "correct": false
+        },
+        {
+          "text": "130",
+          "correct": false
+        }
+      ],
+      "background": "Sprites/Backgrounds/Dollars"
+    },
+    {
+      "question": "Какое имя было у Эрих Мария Ремака до того, как он его поменял?",
+      "answers": [
+        {
+          "text": "Франц",
+          "correct": false
+        },
+        {
+          "text": "Пауль",
+          "correct": true
+        },
+        {
+          "text": "Микаэль",
+          "correct": false
+        },
+        {
+          "text": "Маркез",
+          "correct": false
+        }
+      ],
+      "background": "Sprites/Backgrounds/ErichRemark"
+    },
+    {
+      "question": "Кто напал на Землю в Войне миров Герберта Уэллса?",
+      "answers": [
+        {
+          "text": "Марсиане",
+          "correct": true
+        },
+        {
+          "text": "Нибрианцы",
+          "correct": false
+        },
+        {
+          "text": "Меркурианцы",
+          "correct": false
+        },
+        {
+          "text": "Неизвестные пришельцы",
+          "correct": false
+        }
+      ],
+      "background": "Sprites/Backgrounds/TheWarOfTheWorlds"
     }
   ]
 }

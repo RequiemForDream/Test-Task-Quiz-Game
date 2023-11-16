@@ -19,7 +19,6 @@ namespace Core
         [SerializeField] private GameOverScreenConfiguration _gameOverScreenConfiguration;
         [SerializeField] private QuestionResultScreenConfiguration _questionResultConfiguration;
         [SerializeField] private CanvasConfiguration _canvasConfiguration;
-        [SerializeField] private Transform _questionContainer;
 
         private void Awake()
         {

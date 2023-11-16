@@ -1,6 +1,5 @@
 ﻿using Answers.Interfaces;
 using Counters;
-using Factories;
 using Factories.Interfaces;
 using Questions.Interfaces;
 using System;
@@ -78,7 +77,7 @@ namespace Questions
         private void SetQuestionParameters()
         {
             _questionView.QuestionText.text = _questionEntity.question;
-            _questionView.QuestionBackground.sprite = Resources.Load<Sprite>("Sprites/Rabbit");
+            _questionView.QuestionBackground.sprite = Resources.Load<Sprite>(_questionEntity.background);
         }
 
         private void CheckAnswer(bool IsCorrect)
