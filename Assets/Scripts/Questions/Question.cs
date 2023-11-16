@@ -1,9 +1,11 @@
 ﻿using Answers.Interfaces;
 using Counters;
 using Factories;
+using Factories.Interfaces;
 using Questions.Interfaces;
 using System;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using Utilities;
 
@@ -17,6 +19,8 @@ namespace Questions
         private readonly QuestionModel _questionModel;
         private readonly QuestionEntity _questionEntity;
         private readonly CorrectAnswersCounter _correctAnswersCounter;
+        private readonly IFactory<IQuestionResultScreen> _screenResultFactory;
+        private readonly IFactory<IAnswer> _answerFactory;
 
         private List<IAnswer> _answers = new List<IAnswer>();
 
@@ -29,12 +33,15 @@ namespace Questions
         }
 
         public Question(QuestionView questionView, QuestionModel questionModel, CorrectAnswersCounter correctAnswersCounter, 
-            QuestionEntity questionEntity)
+            QuestionEntity questionEntity, IFactory<IQuestionResultScreen> questionResultScreenFactory, 
+            IFactory<IAnswer> answerFactory)
         {
             _questionView = questionView;
             _questionEntity = questionEntity;
             _questionModel = questionModel;
             _correctAnswersCounter = correctAnswersCounter;
+            _answerFactory = answerFactory;
+            _screenResultFactory = questionResultScreenFactory;
 
             Initialize();
         }
@@ -49,10 +56,9 @@ namespace Questions
 
         private void CreateAnswers()
         {
-            var answerFactory = new AnswerFactory(_questionModel.AnswerConfiguration);
             for (int i = 0; i < _questionEntity.answers.Length; i++)
             {
-                var answer = answerFactory.Create();
+                var answer = _answerFactory.Create();
                 answer.OnAnswerClicked += CheckAnswer;
                 _answers.Add(answer);
                 var answerText = _questionEntity.answers[i].text;
@@ -90,8 +96,7 @@ namespace Questions
 
         private void ShowResult(string answerCorrectText, Sprite answerCorrectSprite)
         {
-            var screenResultFactory = new QuestionResultScreenFactory(_questionModel.QuestionResultScreenConfiguration);
-            var screen = screenResultFactory.Create();
+            var screen = _screenResultFactory.Create();
             screen.OnNextAnswerButtonClicked += NextQuestionClick;
             screen.SetParameters(answerCorrectText, answerCorrectSprite, QuestionTransform);
         }

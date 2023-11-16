@@ -1,5 +1,6 @@
 ﻿using Factories.Interfaces;
 using UI;
+using UI.Configurations;
 using Object = UnityEngine.Object;
 
 namespace Factories
@@ -18,6 +19,11 @@ namespace Factories
             var screen = Object.Instantiate(_questionResultScreenConfiguration.QuestionResultScreenPrefab);
 
             return screen;
+        }
+
+        public void Reclaim(Object obj)
+        {
+            Object.Destroy(obj);
         }
     }
 }

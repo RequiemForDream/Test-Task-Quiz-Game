@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f0096c2cff013a46bd75aaec9557f2d, type: 3}
-  m_Name: GameOverScreen
+  m_Script: {fileID: 11500000, guid: 038680866e9f04241b2f7addd045b252, type: 3}
+  m_Name: QuestionResultScreen
   m_EditorClassIdentifier: 
-  _gameOverScreenPrefab: {fileID: 4790668934796615721, guid: 03f07b35042b65a4abe492dae16e915c, type: 3}
+  _questionResultScreenPrefab: {fileID: 7851740355746670780, guid: a94cec0ac4502cb42a1b90fd6321f785, type: 3}

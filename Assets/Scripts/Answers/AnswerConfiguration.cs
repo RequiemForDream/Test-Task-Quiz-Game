@@ -2,7 +2,7 @@
 
 namespace Answers
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "Answer Configuration", menuName = "Gameplay configrutaions / New Answer Configuration")]
     public class AnswerConfiguration : ScriptableObject
     {
         [SerializeField] private AnswerView _answerView;

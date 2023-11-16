@@ -10,25 +10,22 @@ namespace UI
     {
         [SerializeField] private Button _startNewGameButton;
         [SerializeField] private TMP_Text _scoreCount;
-        public bool IsActiveByAwake = false;
+        [SerializeField] private bool IsActiveByAwake = false;
 
         private CorrectAnswersCounter _correctAnswerCounter;
 
-        public override void Awake()
+        public void Initialize(CorrectAnswersCounter correctAnswersCounter, Transform parent)
         {
-            Extensions.Subscribe(_startNewGameButton, StartNewGame);
-            //gameObject.SetActive(IsActiveByAwake);
-        }
-
-        public void Initialize(CorrectAnswersCounter correctAnswersCounter)
-        {
+            gameObject.transform.SetParent(parent, false);
             _correctAnswerCounter = correctAnswersCounter;
+            Extensions.Subscribe(_startNewGameButton, StartNewGame);
+            gameObject.SetActive(IsActiveByAwake);
             _correctAnswerCounter.OnCorrectAnswerClicked += DisplayScoreCount;
         }
 
         private void DisplayScoreCount(int value)
         {
-            _scoreCount.text = "Правильных ответов: /n" + value.ToString();
+            _scoreCount.text = "Правильных ответов: " + value.ToString();
         }
 
         private void StartNewGame()

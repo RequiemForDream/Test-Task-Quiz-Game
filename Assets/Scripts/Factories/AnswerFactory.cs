@@ -22,5 +22,10 @@ namespace Factories
 
             return answer;
         }
+
+        public void Reclaim(Object obj)
+        {
+            Object.Destroy(obj);
+        }
     }
 }

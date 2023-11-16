@@ -1,9 +1,7 @@
-﻿using Counters;
-using Factories;
-using Factories.Interfaces;
-using Questions;
+﻿using Factories.Interfaces;
 using Questions.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Core
@@ -11,39 +9,49 @@ namespace Core
     public class QuestionGenerator
     {
         private readonly Transform _questionContainer;
-        private readonly QuestionConfiguration _questionConfiguration;
-        private readonly CorrectAnswersCounter _correctAnswersCounter;
+        private readonly IFactory<IQuestion> _questionFactory;
 
         private List<IQuestion> _questions = new List<IQuestion>();
-        private IFactory<IQuestion> _questionFactory;
-
-        public QuestionGenerator(Transform questionCntainer, QuestionConfiguration questionConfiguration,
-            CorrectAnswersCounter correctAnswerCounter)
+        
+        public QuestionGenerator(Transform questionCntainer, IFactory<IQuestion> questionFacttory)
         {
             _questionContainer = questionCntainer;
-            _questionConfiguration = questionConfiguration;
-            _correctAnswersCounter = correctAnswerCounter;
+            _questionFactory = questionFacttory;
             
-            Initialize();
+            //Initialize();
         }
 
-        private void Initialize()
+        public void Initialize()
         {
-            CreateQuestionFactory();
             CreateQuestion();
         }
 
         private void CreateQuestion()
         {
             var question = _questionFactory.Create();
-            question.OnNextQuestionButtonClicked += CreateQuestion;
-            _questions.Add(question);
-            question.QuestionTransform.SetParent(_questionContainer, false);
+            if (question != null)
+            {
+                RemoveQuestion();
+                question.OnNextQuestionButtonClicked += CreateQuestion;
+                _questions.Add(question);
+                question.QuestionTransform.SetParent(_questionContainer, false);
+            }
         }
 
-        private void CreateQuestionFactory()
+        private void RemoveQuestion()
         {
-            _questionFactory = new QuestionFactory(_questionConfiguration, _correctAnswersCounter);
+            if (_questions.Count > 0)
+            {
+                var question = _questions.Last();
+                question.OnNextQuestionButtonClicked -= CreateQuestion;
+                _questionFactory.Reclaim(question.QuestionTransform.gameObject);
+                _questions.Remove(question);
+            }
+        }
+        
+        public void Reset()
+        {
+            RemoveQuestion();
         }
     }
 }
